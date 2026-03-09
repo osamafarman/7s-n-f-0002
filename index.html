@@ -380,13 +380,13 @@
       gap: 0.7rem;
       justify-content: flex-start;
       margin-bottom: 1rem;
+      padding-top: 2rem;
     }
     .word-box {
       display: flex;
       flex-direction: column;
       align-items: center;
       border-radius: var(--radius-xs);
-      overflow: hidden;
       min-width: 75px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.08);
       transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
@@ -405,6 +405,7 @@
       width: 100%;
       text-align: center;
       text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      border-radius: var(--radius-xs) var(--radius-xs) 0 0;
     }
     .word-box-tr {
       padding: 0.45rem 0.7rem;
@@ -416,6 +417,7 @@
       color: var(--text-dark);
       border-top: 2px solid rgba(0,0,0,0.04);
       transition: all 0.35s;
+      border-radius: 0 0 var(--radius-xs) var(--radius-xs);
     }
     .word-box .tooltip-bubble {
       display: none;
@@ -843,7 +845,130 @@
       background-clip: text;
     }
 
-    /* ===== DIVIDER ===== */
+    /* ===== READING PROGRESS BAR ===== */
+    #reading-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--primary-light), var(--gold));
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(29,209,161,0.5);
+    }
+
+    /* ===== SCROLL TO TOP ===== */
+    #scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      left: 1.5rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      font-size: 1.3rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(46,134,222,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      z-index: 500;
+    }
+    #scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #scroll-top:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 8px 25px rgba(46,134,222,0.45);
+    }
+
+    /* ===== DARK MODE TOGGLE ===== */
+    #dark-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d3436, #636e72);
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      z-index: 500;
+    }
+    #dark-toggle:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    }
+
+    /* ===== DARK MODE ===== */
+    body.dark {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      --card-bg: rgba(30,30,50,0.97);
+      --text-dark: #e0e0e0;
+      --text-mid: #a0a0b0;
+      --border-light: rgba(255,255,255,0.08);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.35);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    body.dark .nav-pills {
+      background: rgba(20,20,40,0.92);
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    body.dark .nav-pill { background: rgba(40,40,65,0.95); color: #b0b0c8; }
+    body.dark .hero::after,
+    body.dark .footer::before { background: #1a1a2e; }
+    body.dark .dialogue-line { background: rgba(30,30,50,0.97); }
+    body.dark .sentence-arabic { background: rgba(35,35,55,0.95); }
+    body.dark .full-translation { background: linear-gradient(135deg, rgba(16,172,132,0.1), rgba(16,172,132,0.05)); }
+    body.dark .match-card { background: rgba(35,35,60,0.95); border-color: rgba(255,255,255,0.1); }
+    body.dark .fb-question { background: rgba(30,30,50,0.97); }
+    body.dark .fb-opt { background: rgba(35,35,60,0.95); border-color: rgba(255,255,255,0.12); color: #e0e0e0; }
+    body.dark .stat-badge { background: rgba(35,35,60,0.9); }
+    body.dark .word-box-tr { background: rgba(25,25,45,0.97); color: #c0c0d8; }
+    body.dark .q-card { background: rgba(30,30,50,0.97); }
+    body.dark #dark-toggle { background: linear-gradient(135deg, var(--gold), #e67e22); }
+
+    /* ===== KEYBOARD HINT ===== */
+    .keyboard-hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+    .keyboard-hint kbd {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--border-light);
+      border-radius: 5px;
+      background: #f8f9fa;
+      font-family: monospace;
+      font-size: 0.78rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      color: var(--text-dark);
+      margin: 0 2px;
+    }
+    body.dark .keyboard-hint kbd { background: rgba(255,255,255,0.08); color: #c0c0d8; }
+
+    /* ===== SECTION FADE-IN ON SCROLL ===== */
+    .section { opacity: 1; }
+    .section.in-view { animation: fadeInUp 0.6s ease-out both; }
+
     .divider {
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent-light), var(--primary-light), transparent);
@@ -899,6 +1024,10 @@
 </head>
 <body>
 
+<div id="reading-progress"></div>
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="الرجوع للأعلى">↑</button>
+<button id="dark-toggle" onclick="toggleDark()" title="وضع ليلي / نهاري">🌙</button>
+
 <!-- ===== HERO ===== -->
 <header class="hero">
   <div class="hero-stars" id="hero-stars"></div>
@@ -906,17 +1035,23 @@
     <div class="hero-icon">⚔️</div>
     <h1>مَعْرَكَةُ جَناق قَلْعَة</h1>
     <p>درس تعليمي تفاعلي — Çanakkale Savaşı Etkileşimli Ders</p>
+    <div style="display:flex;justify-content:center;gap:0.7rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:2">
+      <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:0.35rem 1rem;border-radius:20px;font-size:0.82rem;border:1px solid rgba(255,255,255,0.2)">📖 حوار + نص</span>
+      <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:0.35rem 1rem;border-radius:20px;font-size:0.82rem;border:1px solid rgba(255,255,255,0.2)">🔍 تحليل الجمل</span>
+      <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:0.35rem 1rem;border-radius:20px;font-size:0.82rem;border:1px solid rgba(255,255,255,0.2)">🎮 ٣ ألعاب تعليمية</span>
+      <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:0.35rem 1rem;border-radius:20px;font-size:0.82rem;border:1px solid rgba(255,255,255,0.2)">📚 +٤٠ مفردة</span>
+    </div>
   </div>
 </header>
 
 <!-- ===== NAV ===== -->
 <nav class="nav-pills">
-  <button class="nav-pill" onclick="scrollTo('#sec-dialogue')">📖 النص</button>
-  <button class="nav-pill" onclick="scrollTo('#sec-sentences')">🔍 التحليل</button>
-  <button class="nav-pill" onclick="scrollTo('#sec-questions')">❓ الأسئلة</button>
-  <button class="nav-pill" onclick="scrollTo('#sec-fc')">🃏 البطاقات</button>
-  <button class="nav-pill" onclick="scrollTo('#sec-match')">🔗 الوصل</button>
-  <button class="nav-pill" onclick="scrollTo('#sec-fb')">✍️ أكمل</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-dialogue')">📖 النص</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-sentences')">🔍 التحليل</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-questions')">❓ الأسئلة</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-fc')">🃏 البطاقات</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-match')">🔗 الوصل</button>
+  <button class="nav-pill" onclick="scrollToSection('#sec-fb')">✍️ أكمل</button>
 </nav>
 
 <!-- ===== CONTENT ===== -->
@@ -928,12 +1063,22 @@
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="footer-text">
-    ⚔️ مَعْرَكَةُ جَناق قَلْعَة — درس تعليمي تفاعلي 🇹🇷
+    <div style="font-size:2rem;margin-bottom:0.8rem">⚔️ 🇹🇷 📚</div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:0.4rem;color:#fff">مَعْرَكَةُ جَناق قَلْعَة</div>
+    <div style="margin-bottom:0.8rem;font-size:0.9rem">درس تعليمي تفاعلي — Çanakkale Savaşı Etkileşimli Ders</div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:0.82rem;opacity:0.7;margin-bottom:1rem">
+      <span>📖 نص الحوار</span>
+      <span>🔍 تحليل الجمل</span>
+      <span>❓ أسئلة الفهم</span>
+      <span>🃏 بطاقات المفردات</span>
+      <span>🔗 لعبة الوصل</span>
+      <span>✍️ أكمل الفراغ</span>
+    </div>
+    <div style="font-size:0.78rem;opacity:0.5;border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;margin-top:0.5rem">
+      جميع الحقوق محفوظة © — للاستخدام التعليمي
+    </div>
   </div>
 </footer>
-
-<div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
 
 <script>
 /* =============== DATA =============== */
@@ -980,7 +1125,7 @@ const LINES = [
     {ar:'وَاحْتَسِبْ',tr:'ve düşün'},{ar:'لِآلافِ',tr:'binlerce'},{ar:'الرَّاقِدِينَ',tr:'yatanlar'},{ar:'مِنْ',tr:'-sız'},{ar:'دُونِ',tr:'-sız'},{ar:'كَفَنْ',tr:'kefen'},
     {ar:'أَنْتَ',tr:'sen'},{ar:'ابْنُ',tr:'oğlu'},{ar:'الشَّهِيدِ',tr:'şehit'},{ar:'لا',tr:'yapma'},{ar:'تُؤْذِ',tr:'incitme'},{ar:'الأَجْدادَ',tr:'atalar'},{ar:'وَارْكَنْ',tr:'ve dayan'},
     {ar:'لا',tr:'yapma'},{ar:'تُفَرِّطْ',tr:'vazgeçme'},{ar:'بِجَنَّتِكَ',tr:'cennetinden'},{ar:'وَلَوْ',tr:'bile'},{ar:'أَعْطُوكَ',tr:'sana verseler'},{ar:'الكَوْنَ',tr:'evren'},{ar:'بِلا',tr:'-sız'},{ar:'ثَمَنْ',tr:'bedel'}
-  ], fullTr:'Ayaklarının altındakini toprak sanma ve emin ol\nVe kefensiz yatan binlerce kişiyi düşün\nSen şehidin oğlusun, atalara eziyet etme ve dayan\nCennetinden vazgeçme, sana bedelsiz evreni verseler bile'},
+  ], fullTr:'Bastığın yerleri "toprak!" diyerek geçme, tanı:\nDüşün altındaki binlerce kefensiz yatanı.\nSen şehit oğlusun, incitme, yazıktır, atanı:\nVerme, dünyaları alsan da bu cennet vatanı.'},
   {speaker:'المُعَلِّمة', words:[
     {ar:'أَحْسَنْتَ',tr:'Aferin'},{ar:'يا',tr:'ey'},{ar:'حُسَيْن!',tr:'Hüseyin!'},{ar:'ما أَجْمَلَ',tr:'Ne güzel'},{ar:'قَرَأْتَ',tr:'okudun'},{ar:'هذا',tr:'bu'},{ar:'الشِّعْرَ.',tr:'şiir.'}
   ], fullTr:'Aferin Hüseyin! Bu şiiri ne güzel okudun.'}
@@ -1025,7 +1170,7 @@ const FB_BANK = [
 function shuffle(a) { let arr=[...a]; for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
 function getColor(i) { return COLORS[i % COLORS.length]; }
 function el(tag, cls, html) { const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
-function scrollTo(sel) { document.querySelector(sel)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+function scrollToSection(sel) { document.querySelector(sel)?.scrollIntoView({behavior:'smooth',block:'start'}); }
 
 /* =============== HERO STARS =============== */
 function createStars() {
@@ -1324,6 +1469,9 @@ function initFlashcards(gs) {
     btns.appendChild(shufBtn);
     wrap.appendChild(btns);
 
+    const kbHint = el('div','keyboard-hint','⌨️ <kbd>→</kbd> التالية &nbsp; <kbd>←</kbd> السابقة &nbsp; <kbd>مسافة</kbd> اقلب البطاقة');
+    wrap.appendChild(kbHint);
+
     gs.appendChild(wrap);
   }
 
@@ -1511,7 +1659,60 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSentences();
   renderQuestions();
   renderGames();
+  initReadingProgress();
+  initScrollTop();
+  initKeyboardShortcuts();
+  initDarkMode();
 });
+
+/* ===== READING PROGRESS ===== */
+function initReadingProgress() {
+  const bar = document.getElementById('reading-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+}
+
+/* ===== SCROLL TO TOP ===== */
+function initScrollTop() {
+  const btn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
+/* ===== DARK MODE ===== */
+function initDarkMode() {
+  const saved = localStorage.getItem('darkMode');
+  if (saved === 'true') {
+    document.body.classList.add('dark');
+    document.getElementById('dark-toggle').textContent = '☀️';
+  }
+}
+function toggleDark() {
+  const isDark = document.body.classList.toggle('dark');
+  const btn = document.getElementById('dark-toggle');
+  btn.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('darkMode', isDark);
+}
+
+/* ===== KEYBOARD SHORTCUTS ===== */
+function initKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Only when flashcard game is visible
+    const fcSection = document.getElementById('sec-fc');
+    if (!fcSection) return;
+    const nextBtn = fcSection.querySelector('.btn-primary');
+    const prevBtn = fcSection.querySelector('.btn-purple');
+    const flipCard = fcSection.querySelector('.flashcard');
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === ' ' && flipCard) { e.preventDefault(); flipCard.click(); }
+  });
+}
 </script>
 </body>
 </html>
