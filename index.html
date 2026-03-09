@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مَعْرَكَةُ جَناق قَلْعَة — درس تعليمي تفاعلي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --primary-light: #2e86de;
+      --primary-glow: rgba(46,134,222,0.15);
+      --accent: #10ac84;
+      --accent-light: #1dd1a1;
+      --accent-glow: rgba(29,209,161,0.15);
+      --danger: #ee5a24;
+      --danger-light: #f8a5c2;
+      --gold: #f6b93b;
+      --purple: #6c5ce7;
+      --bg-start: #0f0c29;
+      --bg-mid: #302b63;
+      --bg-end: #24243e;
+      --card-bg: rgba(255,255,255,0.97);
+      --card-glass: rgba(255,255,255,0.12);
+      --text-dark: #2d3436;
+      --text-mid: #636e72;
+      --text-light: #b2bec3;
+      --border-light: rgba(0,0,0,0.06);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+      --shadow-glow: 0 0 40px rgba(46,134,222,0.1);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --radius-xs: 10px;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Naskh Arabic', serif;
+      background: #f0f3f8;
+      color: var(--text-dark);
+      line-height: 1.9;
+      direction: rtl;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .lato { font-family:'Lato',sans-serif; direction:ltr; display:inline-block; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+      color: #fff;
+      padding: 4rem 1.5rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(46,134,222,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(29,209,161,0.12) 0%, transparent 50%);
+      animation: heroShimmer 15s ease-in-out infinite alternate;
+    }
+    @keyframes heroShimmer {
+      0% { transform: translateX(-5%) translateY(-5%); }
+      100% { transform: translateX(5%) translateY(5%); }
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 80px;
+      background: #f0f3f8;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .hero-stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-stars span {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.3; } 50% { opacity: 1; }
+    }
+
+    /* ===== NAV PILLS ===== */
+    .nav-pills {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(240,243,248,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-pill {
+      padding: 0.55rem 1.2rem;
+      border: none;
+      border-radius: 25px;
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      background: #fff;
+      color: var(--text-mid);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-pill:hover {
+      background: var(--primary-light);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(46,134,222,0.3);
+    }
+    .nav-pill:active { transform: translateY(0); }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(90deg, var(--accent), var(--primary-light), transparent) 1;
+    }
+    .section-header .icon {
+      font-size: 2rem;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(46,134,222,0.2);
+    }
+    .section-header h2 {
+      font-size: 1.7rem;
+      color: var(--primary);
+      font-weight: 700;
+      flex: 1;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      animation: fadeInUp 0.5s ease-out both;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(25px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeSlide {
+      from { opacity:0; transform:translateY(-12px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes popIn {
+      0% { transform:scale(0.85); opacity:0; }
+      60% { transform:scale(1.03); }
+      100% { transform:scale(1); opacity:1; }
+    }
+    @keyframes shake {
+      0%,100% { transform:translateX(0); }
+      20% { transform:translateX(-8px); }
+      40% { transform:translateX(8px); }
+      60% { transform:translateX(-5px); }
+      80% { transform:translateX(5px); }
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow:0 0 5px rgba(46,134,222,0.2); }
+      50% { box-shadow:0 0 25px rgba(46,134,222,0.5); }
+    }
+    @keyframes bounceIn {
+      0% { transform:scale(0); }
+      50% { transform:scale(1.15); }
+      70% { transform:scale(0.95); }
+      100% { transform:scale(1); }
+    }
+    @keyframes slideInRight {
+      from { opacity:0; transform:translateX(30px); }
+      to { opacity:1; transform:translateX(0); }
+    }
+    @keyframes confettiBurst {
+      0% { transform:scale(0) rotate(0); opacity:1; }
+      100% { transform:scale(1.5) rotate(180deg); opacity:0; }
+    }
+
+    .anim-delay-1 { animation-delay:0.1s; }
+    .anim-delay-2 { animation-delay:0.2s; }
+    .anim-delay-3 { animation-delay:0.3s; }
+    .anim-delay-4 { animation-delay:0.4s; }
+
+    /* ===== DIALOGUE LINES ===== */
+    .dialogue-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-sm);
+      border-right: 5px solid var(--accent);
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      animation: slideInRight 0.5s ease-out both;
+    }
+    .dialogue-line:nth-child(odd) { animation-delay: 0.05s; }
+    .dialogue-line:nth-child(even) { animation-delay: 0.1s; }
+    .dialogue-line:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transform: translateX(-4px);
+    }
+    .dialogue-line.poem-line {
+      border-right-color: #c0392b;
+      background: linear-gradient(135deg, #fdf2f2, #fff5f5);
+      border-right-style: dashed;
+      border-right-width: 5px;
+      position: relative;
+    }
+    .dialogue-line.poem-line::before {
+      content: '📜';
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      font-size: 1.2rem;
+      opacity: 0.4;
+    }
+
+    .speaker-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 76px;
+      flex-shrink: 0;
+    }
+    .speaker-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      margin-bottom: 0.3rem;
+      transition: transform 0.3s;
+      border: 3px solid #fff;
+    }
+    .dialogue-line:hover .speaker-avatar { transform: scale(1.1); }
+    .speaker-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      color: #fff;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .dialogue-text {
+      font-size: 1.3rem;
+      line-height: 2.2;
+      flex: 1;
+      padding-top: 0.3rem;
+    }
+    .dialogue-text .word {
+      display: inline;
+      cursor: default;
+      transition: all 0.25s;
+      border-radius: 4px;
+      padding: 0 3px;
+    }
+    .dialogue-text .word:hover {
+      background: rgba(0,0,0,0.05);
+      transform: scale(1.02);
+    }
+
+    /* ===== SENTENCE ANALYSIS ===== */
+    .sentence-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .sentence-card-header .speaker-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .sentence-card-header .poem-tag {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .sentence-arabic {
+      font-size: 1.35rem;
+      line-height: 2.4;
+      margin-bottom: 1rem;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--border-light);
+    }
+
+    .words-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: flex-start;
+      margin-bottom: 1rem;
+    }
+    .word-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+      min-width: 75px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      animation: popIn 0.3s ease-out both;
+    }
+    .word-box:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .word-box-ar {
+      padding: 0.55rem 0.9rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      width: 100%;
+      text-align: center;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .word-box-tr {
+      padding: 0.45rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: #fff;
+      width: 100%;
+      text-align: center;
+      color: var(--text-dark);
+      border-top: 2px solid rgba(0,0,0,0.04);
+      transition: all 0.35s;
+    }
+    .word-box .tooltip-bubble {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      z-index: 20;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: popIn 0.2s ease-out;
+    }
+    .word-box .tooltip-bubble::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--primary);
+    }
+    .word-box.hidden-tr .word-box-tr {
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+    .word-box.hidden-tr:hover .tooltip-bubble { display: block; }
+
+    .full-translation {
+      background: linear-gradient(135deg, #e8f8f5, #f0faf7);
+      border-radius: var(--radius-xs);
+      padding: 1.1rem 1.3rem;
+      margin-top: 1rem;
+      border-right: 4px solid var(--accent);
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .full-translation .lato { font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1.1rem;
+      border: none;
+      border-radius: 25px;
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+    }
+    .btn:active::after {
+      width: 200px;
+      height: 200px;
+      top: calc(50% - 100px);
+      left: calc(50% - 100px);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .btn:active { transform: translateY(0); }
+
+    .btn-accent { background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: #fff; }
+    .btn-accent:hover { box-shadow: 0 6px 20px rgba(16,172,132,0.35); }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; }
+    .btn-primary:hover { box-shadow: 0 6px 20px rgba(46,134,222,0.35); }
+    .btn-danger { background: linear-gradient(135deg, #ee5a24, #e55039); color: #fff; }
+    .btn-purple { background: linear-gradient(135deg, var(--purple), #a29bfe); color: #fff; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-outline:hover { background: var(--accent); color: #fff; }
+    .btn-sm { padding: 0.38rem 0.85rem; font-size: 0.78rem; }
+    .btn-lg { padding: 0.7rem 1.6rem; font-size: 1rem; }
+    .btn-global {
+      padding: 0.65rem 1.8rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow-md);
+    }
+    .btns-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; }
+
+    /* ===== HIDDEN CONTENT ===== */
+    .hidden-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1),
+                  opacity 0.4s ease,
+                  margin 0.4s ease;
+      margin-top: 0;
+    }
+    .hidden-content.show {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 0.8rem;
+    }
+
+    /* ===== QUESTIONS ===== */
+    .q-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.6rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-md);
+      border-right: 5px solid var(--primary-light);
+      transition: all 0.35s;
+      animation: fadeInUp 0.5s ease-out both;
+    }
+    .q-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .q-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.7rem;
+    }
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(46,134,222,0.25);
+    }
+    .q-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      flex: 1;
+      line-height: 1.9;
+    }
+    .q-tr-box {
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #f8f0ff, #faf5ff);
+      border-radius: var(--radius-xs);
+      border-right: 3px solid var(--purple);
+    }
+    .answer-box {
+      background: linear-gradient(135deg, #eafaf1, #f0fff8);
+      border-radius: var(--radius-xs);
+      padding: 1rem 1.2rem;
+      border-right: 4px solid #27ae60;
+    }
+    .answer-box .ar-ans { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text-dark); }
+    .answer-box .tr-ans { font-size: 0.9rem; color: var(--text-mid); }
+
+    /* ===== GAMES COMMON ===== */
+    .game-section {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .game-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent), var(--gold));
+    }
+    .game-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+    .game-stats {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 1rem;
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+    }
+    .progress-bar {
+      height: 10px;
+      background: #ecf0f1;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--primary-light));
+      border-radius: 5px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 30px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+      border-radius: 0 5px 5px 0;
+    }
+
+    /* ===== FLASHCARD ===== */
+    .fc-container { display: flex; justify-content: center; margin: 2rem 0; perspective: 1000px; }
+    .flashcard {
+      width: 340px;
+      height: 210px;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .flashcard.flipped { transform: rotateY(180deg); }
+    .flashcard-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      backface-visibility: hidden;
+      padding: 2rem;
+    }
+    .flashcard-front {
+      background: linear-gradient(135deg, var(--primary), #2e86de, #48dbfb);
+      color: #fff;
+    }
+    .flashcard-front::before {
+      content: '';
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 30px; height: 30px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+    .flashcard-front::after {
+      content: '';
+      position: absolute;
+      bottom: 10px; left: 10px;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      transform: rotate(45deg);
+    }
+    .fc-word { font-size: 2.2rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .fc-hint { font-size: 0.85rem; opacity: 0.7; margin-top: 0.6rem; }
+    .flashcard-back {
+      background: linear-gradient(135deg, var(--accent), #1dd1a1, #55efc4);
+      color: #fff;
+      transform: rotateY(180deg);
+    }
+    .fc-tr { font-size: 1.8rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    .fc-ar { font-size: 1.05rem; opacity: 0.8; margin-top: 0.5rem; }
+    .fc-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    /* ===== MATCHING ===== */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+      gap: 0.9rem;
+      margin: 1.2rem 0;
+    }
+    .match-card {
+      padding: 1rem 0.6rem;
+      text-align: center;
+      border-radius: var(--radius-xs);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      border: 2px solid var(--border-light);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      user-select: none;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .match-card:hover:not(.matched):not(.selected) {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(16,172,132,0.15);
+    }
+    .match-card.selected {
+      border-color: var(--primary-light);
+      background: var(--primary-glow);
+      box-shadow: 0 0 0 4px rgba(46,134,222,0.15);
+      transform: scale(1.03);
+      animation: pulseGlow 1.5s infinite;
+    }
+    .match-card.matched {
+      background: linear-gradient(135deg, #d5f5e3, #e8f8f5);
+      border-color: #27ae60;
+      cursor: default;
+      pointer-events: none;
+      animation: bounceIn 0.4s ease-out;
+    }
+    .match-card.wrong {
+      animation: shake 0.5s;
+      border-color: #e74c3c;
+      background: #ffeaa7;
+    }
+    .stars-display { font-size: 2rem; text-align: center; margin: 1.2rem 0; letter-spacing: 4px; }
+
+    /* ===== FILL BLANK ===== */
+    .fb-question {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      border-right: 4px solid var(--primary-light);
+      transition: all 0.35s;
+      animation: fadeInUp 0.4s ease-out both;
+    }
+    .fb-question:hover { box-shadow: var(--shadow-md); }
+    .fb-sentence { font-size: 1.2rem; margin-bottom: 0.6rem; line-height: 2.2; }
+    .fb-blank {
+      display: inline-block;
+      border-bottom: 3px dashed var(--accent);
+      min-width: 85px;
+      text-align: center;
+      padding: 0 6px;
+      color: var(--accent);
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .fb-hint { font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.9rem; }
+    .fb-options { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .fb-opt {
+      padding: 0.55rem 1.2rem;
+      border: 2px solid var(--border-light);
+      border-radius: 25px;
+      background: #fff;
+      cursor: pointer;
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .fb-opt:hover:not(.disabled) {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .fb-opt.correct {
+      background: linear-gradient(135deg, #d5f5e3, #a3e4c1);
+      border-color: #27ae60;
+      color: #27ae60;
+      animation: bounceIn 0.4s ease-out;
+    }
+    .fb-opt.wrong-opt {
+      background: #ffeaa7;
+      border-color: #e74c3c;
+      color: #e74c3c;
+      animation: shake 0.5s;
+    }
+    .fb-opt.disabled { opacity: 0.45; cursor: default; pointer-events: none; }
+    .fb-result {
+      text-align: center;
+      padding: 2.5rem;
+      animation: popIn 0.5s ease-out;
+    }
+    .fb-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-light), var(--primary-light), transparent);
+      margin: 1.5rem 0 2.5rem;
+      border-radius: 1px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0; right: 0;
+      height: 60px;
+      background: #f0f3f8;
+      clip-path: ellipse(55% 100% at 50% 0%);
+    }
+    .footer-text { position: relative; z-index: 2; }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:640px) {
+      .hero { padding: 3rem 1rem 2.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero p { font-size: 0.95rem; }
+      .section { padding: 1.5rem 1rem; }
+      .section-header h2 { font-size: 1.3rem; }
+      .dialogue-line { flex-direction: column; gap: 0.6rem; padding: 1rem; }
+      .speaker-badge { flex-direction: row; gap: 0.6rem; min-width: auto; }
+      .dialogue-text { font-size: 1.1rem; }
+      .card { padding: 1.3rem; }
+      .flashcard { width: 280px; height: 180px; }
+      .fc-word { font-size: 1.7rem; }
+      .match-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+      .match-card { font-size: 0.85rem; padding: 0.7rem 0.3rem; min-height: 50px; }
+      .sentence-arabic { font-size: 1.15rem; }
+      .word-box { min-width: 62px; }
+      .word-box-ar { font-size: 1rem; padding: 0.4rem 0.7rem; }
+      .btn { font-size: 0.78rem; padding: 0.38rem 0.85rem; }
+      .nav-pills { gap: 0.4rem; padding: 1rem 0.8rem; }
+      .nav-pill { font-size: 0.78rem; padding: 0.45rem 0.9rem; }
+      .game-section { padding: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-stars" id="hero-stars"></div>
+  <div class="hero-content">
+    <div class="hero-icon">⚔️</div>
+    <h1>مَعْرَكَةُ جَناق قَلْعَة</h1>
+    <p>درس تعليمي تفاعلي — Çanakkale Savaşı Etkileşimli Ders</p>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-pills">
+  <button class="nav-pill" onclick="scrollTo('#sec-dialogue')">📖 النص</button>
+  <button class="nav-pill" onclick="scrollTo('#sec-sentences')">🔍 التحليل</button>
+  <button class="nav-pill" onclick="scrollTo('#sec-questions')">❓ الأسئلة</button>
+  <button class="nav-pill" onclick="scrollTo('#sec-fc')">🃏 البطاقات</button>
+  <button class="nav-pill" onclick="scrollTo('#sec-match')">🔗 الوصل</button>
+  <button class="nav-pill" onclick="scrollTo('#sec-fb')">✍️ أكمل</button>
+</nav>
+
+<!-- ===== CONTENT ===== -->
+<section class="section" id="sec-dialogue"></section>
+<section class="section" id="sec-sentences"></section>
+<section class="section" id="sec-questions"></section>
+<section class="section" id="sec-games"></section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-text">
+    ⚔️ مَعْرَكَةُ جَناق قَلْعَة — درس تعليمي تفاعلي 🇹🇷
+  </div>
+</footer>
+
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+
+<script>
+/* =============== DATA =============== */
+const COLORS = ['#e74c3c','#27ae60','#2980b9','#8e44ad','#e67e22','#16a085','#e84393','#0984e3','#6c5ce7','#00b894','#e17055','#d63031','#74b9ff','#a29bfe','#00cec9','#fd79a8','#b71540','#0c2461','#e58e26','#636e72'];
+
+const SPEAKERS = {
+  'المُعَلِّمة': { color:'#8e44ad', bg:'linear-gradient(135deg,#8e44ad,#a29bfe)', emoji:'👩‍🏫' },
+  'أَرْكان':    { color:'#2980b9', bg:'linear-gradient(135deg,#2980b9,#74b9ff)', emoji:'👦' },
+  'عَلِيّ':     { color:'#27ae60', bg:'linear-gradient(135deg,#27ae60,#00b894)', emoji:'🧑' },
+  'مُحَمَّد':   { color:'#d35400', bg:'linear-gradient(135deg,#d35400,#e17055)', emoji:'👦🏻' },
+  'حُسَيْن':   { color:'#c0392b', bg:'linear-gradient(135deg,#c0392b,#e74c3c)', emoji:'🧒' }
+};
+
+const LINES = [
+  {speaker:'المُعَلِّمة', words:[
+    {ar:'يا',tr:'Ey'},{ar:'طُلّابِي!',tr:'öğrencilerim!'},{ar:'لِماذا',tr:'Neden'},{ar:'جَناق قَلْعَة',tr:'Çanakkale'},{ar:'مَدينةٌ',tr:'şehir'},{ar:'مُهِمَّةٌ',tr:'önemli'},{ar:'في',tr:'-de'},{ar:'العالَمِ',tr:'dünya'},{ar:'الإسْلامِيِّ؟',tr:'İslam?'}
+  ], fullTr:'Öğrencilerim! Çanakkale neden İslam dünyasında önemli bir şehirdir?'},
+  {speaker:'أَرْكان', words:[
+    {ar:'لِأنَّ',tr:'Çünkü'},{ar:'مَعْرَكَةَ',tr:'savaşı'},{ar:'جَناق قَلْعَة',tr:'Çanakkale'},{ar:'كانَتْ',tr:'idi'},{ar:'مَعْرَكَةَ',tr:'savaş'},{ar:'حَياةٍ',tr:'hayat'},{ar:'أَوْ',tr:'veya'},{ar:'مَماتٍ',tr:'ölüm'},{ar:'بِالنِّسْبَةِ',tr:'-göre'},{ar:'لَنا.',tr:'bize.'}
+  ], fullTr:'Çünkü Çanakkale Savaşı bizim için bir hayat ya da ölüm savaşıydı.'},
+  {speaker:'أَرْكان', words:[
+    {ar:'وَأَصْبَحَتْ',tr:'Ve oldu'},{ar:'الحُروبُ',tr:'savaşlar'},{ar:'البَحْرِيَّةُ',tr:'deniz'},{ar:'وَالبَرِّيَّةُ',tr:'ve kara'},{ar:'شَدِيدةً',tr:'şiddetli'},{ar:'فِيها.',tr:'orada.'}
+  ], fullTr:'Ve orada deniz ve kara savaşları şiddetli oldu.'},
+  {speaker:'المُعَلِّمة', words:[
+    {ar:'أَحْسَنْتَ',tr:'Aferin'},{ar:'يا',tr:'ey'},{ar:'أَرْكان!',tr:'Erkan!'}
+  ], fullTr:'Aferin Erkan!'},
+  {speaker:'عَلِيّ', words:[
+    {ar:'وَكانَ',tr:'Ve idi'},{ar:'جَيْشُ',tr:'ordu'},{ar:'العَدُوِّ',tr:'düşman'},{ar:'أَقْوى',tr:'daha güçlü'},{ar:'مِن',tr:'-den'},{ar:'جَيْشِنا،',tr:'ordumuz,'},{ar:'وَلَكِن',tr:'ama'},{ar:'جَيْشَنا',tr:'ordumuz'},{ar:'انْتَصَرَ',tr:'kazandı'},{ar:'نَصْرًا',tr:'zafer'},{ar:'عَظِيمًا',tr:'büyük'},{ar:'فِيها.',tr:'orada.'}
+  ], fullTr:'Düşman ordusu ordumuzdan daha güçlüydü, ama ordumuz orada büyük bir zafer kazandı.'},
+  {speaker:'المُعَلِّمة', words:[
+    {ar:'صَدَقْتَ',tr:'Doğru söyledin'},{ar:'يا',tr:'ey'},{ar:'عَلِيُّ!',tr:'Ali!'},{ar:'تَفَضَّلْ',tr:'Buyur'},{ar:'يا',tr:'ey'},{ar:'مُحَمَّد!',tr:'Muhammed!'}
+  ], fullTr:'Doğru söyledin Ali! Buyur Muhammed!'},
+  {speaker:'مُحَمَّد', words:[
+    {ar:'اسْتُشْهِدَ',tr:'Şehit düştü'},{ar:'فِيها',tr:'orada'},{ar:'جُنودٌ',tr:'askerler'},{ar:'كَثِيرون',tr:'çok'},{ar:'وَلَكِنَّهُمْ',tr:'ama onlar'},{ar:'كَتَبُوا',tr:'yazdılar'},{ar:'مَلْحَمَةً',tr:'destan'},{ar:'فَرِيدةً.',tr:'eşsiz.'}
+  ], fullTr:'Orada çok asker şehit düştü ama eşsiz bir destan yazdılar.'},
+  {speaker:'حُسَيْن', words:[
+    {ar:'مُعَلِّمَتِي،',tr:'Öğretmenim,'},{ar:'مِنَ',tr:'-den'},{ar:'المُمْكِنِ',tr:'mümkün'},{ar:'أَنْ',tr:'mı'},{ar:'أَقْرَأَ',tr:'okuyayım'},{ar:'سَطْرًا',tr:'satır'},{ar:'مِنْ',tr:'-dan'},{ar:'نَشيدِ',tr:'marş'},{ar:'الاسْتِقْلالِ؟',tr:'İstiklal?'}
+  ], fullTr:'Öğretmenim, İstiklal Marşı\'ndan bir satır okuyabilir miyim?'},
+  {speaker:'المُعَلِّمة', words:[
+    {ar:'طَبْعًا',tr:'Tabii'},{ar:'يا',tr:'ey'},{ar:'حُسَيْن!',tr:'Hüseyin!'},{ar:'تَفَضَّلْ!',tr:'Buyur!'}
+  ], fullTr:'Tabii Hüseyin! Buyur!'},
+  {speaker:'حُسَيْن', isPoem:true, words:[
+    {ar:'لا',tr:'yapma'},{ar:'تَحْسَبَنَّ',tr:'sanma'},{ar:'ما',tr:'şeyi'},{ar:'تَحْتَ',tr:'altında'},{ar:'رِجْلَيْكَ',tr:'ayakların'},{ar:'تُرابًا',tr:'toprak'},{ar:'وَأَيْقِنْ',tr:'ve emin ol'},
+    {ar:'وَاحْتَسِبْ',tr:'ve düşün'},{ar:'لِآلافِ',tr:'binlerce'},{ar:'الرَّاقِدِينَ',tr:'yatanlar'},{ar:'مِنْ',tr:'-sız'},{ar:'دُونِ',tr:'-sız'},{ar:'كَفَنْ',tr:'kefen'},
+    {ar:'أَنْتَ',tr:'sen'},{ar:'ابْنُ',tr:'oğlu'},{ar:'الشَّهِيدِ',tr:'şehit'},{ar:'لا',tr:'yapma'},{ar:'تُؤْذِ',tr:'incitme'},{ar:'الأَجْدادَ',tr:'atalar'},{ar:'وَارْكَنْ',tr:'ve dayan'},
+    {ar:'لا',tr:'yapma'},{ar:'تُفَرِّطْ',tr:'vazgeçme'},{ar:'بِجَنَّتِكَ',tr:'cennetinden'},{ar:'وَلَوْ',tr:'bile'},{ar:'أَعْطُوكَ',tr:'sana verseler'},{ar:'الكَوْنَ',tr:'evren'},{ar:'بِلا',tr:'-sız'},{ar:'ثَمَنْ',tr:'bedel'}
+  ], fullTr:'Ayaklarının altındakini toprak sanma ve emin ol\nVe kefensiz yatan binlerce kişiyi düşün\nSen şehidin oğlusun, atalara eziyet etme ve dayan\nCennetinden vazgeçme, sana bedelsiz evreni verseler bile'},
+  {speaker:'المُعَلِّمة', words:[
+    {ar:'أَحْسَنْتَ',tr:'Aferin'},{ar:'يا',tr:'ey'},{ar:'حُسَيْن!',tr:'Hüseyin!'},{ar:'ما أَجْمَلَ',tr:'Ne güzel'},{ar:'قَرَأْتَ',tr:'okudun'},{ar:'هذا',tr:'bu'},{ar:'الشِّعْرَ.',tr:'şiir.'}
+  ], fullTr:'Aferin Hüseyin! Bu şiiri ne güzel okudun.'}
+];
+
+const QUESTIONS = [
+  {q:'ما هِي الفِكْرَة الرَّئيسة لِلحِوار؟', qTr:'Diyaloğun ana fikri nedir?', a:'أَهَمِّيَّةُ مَعْرَكَةِ جَناق قَلْعَة وَتَضْحِياتُ الجُنودِ.', aTr:'Çanakkale Savaşı\'nın önemi ve askerlerin fedakârlıkları.'},
+  {q:'مَن قالَ «مَعْرَكَة جَناق قَلْعَة كانَتْ مَعْرَكَة حَياة أَوْ مَمات بِالنِّسبة لَنا»؟', qTr:'"Çanakkale Savaşı bizim için bir hayat ya da ölüm savaşıydı" sözünü kim söyledi?', a:'أَرْكان.', aTr:'Erkan.'},
+  {q:'كَيْفَ أَجابَ مُحَمَّد عن سُؤال المُعَلِّمة؟', qTr:'Muhammed öğretmenin sorusuna nasıl cevap verdi?', a:'اسْتُشْهِدَ جُنودٌ كَثيرون لَكِنَّهُمْ كَتَبُوا مَلْحَمَةً فَريدةً.', aTr:'Çok asker şehit düştü ama eşsiz bir destan yazdılar.'},
+  {q:'هَلْ كانَ جَيْشُ العَدُوِّ أَقْوى مِن جَيْشِنا؟', qTr:'Düşman ordusu ordumuzdan daha güçlü müydü?', a:'نَعَمْ، لَكِنَّ جَيْشَنا انْتَصَرَ.', aTr:'Evet, ama ordumuz kazandı.'},
+  {q:'مَنْ قَرَأَ الشِّعْرَ؟', qTr:'Şiiri kim okudu?', a:'حُسَيْن.', aTr:'Hüseyin.'},
+  {q:'مَنْ كَتَبَ مَلْحَمَةً فَرِيدَةً في جَناق قَلْعَة؟', qTr:'Çanakkale\'de eşsiz bir destanı kim yazdı?', a:'الجُنودُ الشُّهَداءُ.', aTr:'Şehit askerler.'}
+];
+
+const WORD_BANK = [
+  {ar:'طُلّاب',tr:'öğrenciler'},{ar:'مَعْرَكَة',tr:'savaş'},{ar:'حَياة',tr:'hayat'},{ar:'مَمات',tr:'ölüm'},
+  {ar:'حُروب',tr:'savaşlar'},{ar:'بَحْرِيَّة',tr:'deniz'},{ar:'بَرِّيَّة',tr:'kara'},{ar:'شَدِيدة',tr:'şiddetli'},
+  {ar:'جَيْش',tr:'ordu'},{ar:'عَدُوّ',tr:'düşman'},{ar:'أَقْوى',tr:'daha güçlü'},{ar:'انْتَصَرَ',tr:'kazandı'},
+  {ar:'نَصْر',tr:'zafer'},{ar:'عَظِيم',tr:'büyük'},{ar:'اسْتُشْهِدَ',tr:'şehit düştü'},{ar:'جُنود',tr:'askerler'},
+  {ar:'كَثِيرون',tr:'çok'},{ar:'مَلْحَمَة',tr:'destan'},{ar:'فَرِيدة',tr:'eşsiz'},{ar:'سَطْر',tr:'satır'},
+  {ar:'نَشيد',tr:'marş'},{ar:'الاسْتِقْلال',tr:'İstiklal'},{ar:'تُراب',tr:'toprak'},{ar:'شَهِيد',tr:'şehit'},
+  {ar:'أَجْداد',tr:'atalar'},{ar:'جَنَّة',tr:'cennet'},{ar:'الكَوْن',tr:'evren'},{ar:'ثَمَن',tr:'bedel'},
+  {ar:'مَدِينة',tr:'şehir'},{ar:'مُهِمَّة',tr:'önemli'},{ar:'العالَم',tr:'dünya'},{ar:'مُعَلِّمة',tr:'öğretmen'},
+  {ar:'كَتَبُوا',tr:'yazdılar'},{ar:'أَقْرَأ',tr:'okurum'},{ar:'رِجْل',tr:'ayak'},{ar:'كَفَن',tr:'kefen'},
+  {ar:'ابْن',tr:'oğul'},{ar:'صَدَقْتَ',tr:'doğru söyledin'},{ar:'أَحْسَنْتَ',tr:'aferin'},{ar:'الشِّعْر',tr:'şiir'}
+];
+
+const FB_BANK = [
+  {sentence:'جَناق قَلْعَة مَدينةٌ _____ في العالَمِ الإسْلامِيِّ.', hint:'Çanakkale İslam dünyasında _____ bir şehirdir.', answer:'مُهِمَّةٌ', options:['مُهِمَّةٌ','شَدِيدةٌ','فَرِيدةٌ','كَثِيرةٌ']},
+  {sentence:'كانَتْ مَعْرَكَةَ _____ أَوْ مَماتٍ.', hint:'Bu bir _____ veya ölüm savaşıydı.', answer:'حَياةٍ', options:['حَياةٍ','نَصْرٍ','جَيْشٍ','حُروبٍ']},
+  {sentence:'أَصْبَحَتْ الحُروبُ البَحْرِيَّةُ وَالبَرِّيَّةُ _____ فِيها.', hint:'Deniz ve kara savaşları orada _____ oldu.', answer:'شَدِيدةً', options:['شَدِيدةً','فَرِيدةً','عَظِيمةً','كَثِيرةً']},
+  {sentence:'كانَ جَيْشُ _____ أَقْوى مِن جَيْشِنا.', hint:'_____ ordusu ordumuzdan daha güçlüydü.', answer:'العَدُوِّ', options:['العَدُوِّ','الشَّهِيدِ','الأَجْدادِ','البَحْرِيَّةِ']},
+  {sentence:'جَيْشَنا انْتَصَرَ نَصْرًا _____ فِيها.', hint:'Ordumuz orada _____ bir zafer kazandı.', answer:'عَظِيمًا', options:['عَظِيمًا','شَدِيدًا','كَثِيرًا','بَحْرِيًّا']},
+  {sentence:'اسْتُشْهِدَ فِيها _____ كَثِيرون.', hint:'Orada çok _____ şehit düştü.', answer:'جُنودٌ', options:['جُنودٌ','أَجْدادٌ','طُلّابٌ','أَبْناءٌ']},
+  {sentence:'كَتَبُوا مَلْحَمَةً _____.', hint:'_____ bir destan yazdılar.', answer:'فَرِيدةً', options:['فَرِيدةً','شَدِيدةً','مُهِمَّةً','بَحْرِيَّةً']},
+  {sentence:'أَقْرَأَ سَطْرًا مِن نَشيدِ _____.', hint:'_____ Marşı\'ndan bir satır okuyayım.', answer:'الاسْتِقْلالِ', options:['الاسْتِقْلالِ','الشَّهِيدِ','الأَجْدادِ','العَدُوِّ']},
+  {sentence:'لا تَحْسَبَنَّ ما تَحْتَ رِجْلَيْكَ _____.', hint:'Ayaklarının altındakini _____ sanma.', answer:'تُرابًا', options:['تُرابًا','كَفَنًا','جَنَّةً','نَصْرًا']},
+  {sentence:'أَنْتَ ابْنُ _____ لا تُؤْذِ الأَجْدادَ.', hint:'Sen _____ oğlusun, atalara eziyet etme.', answer:'الشَّهِيدِ', options:['الشَّهِيدِ','العَدُوِّ','الجَيْشِ','المُعَلِّمِ']}
+];
+
+/* =============== HELPERS =============== */
+function shuffle(a) { let arr=[...a]; for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+function getColor(i) { return COLORS[i % COLORS.length]; }
+function el(tag, cls, html) { const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+function scrollTo(sel) { document.querySelector(sel)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+/* =============== HERO STARS =============== */
+function createStars() {
+  const container = document.getElementById('hero-stars');
+  for(let i=0; i<30; i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = Math.random()*3+'s';
+    s.style.animationDuration = (2+Math.random()*3)+'s';
+    container.appendChild(s);
+  }
+}
+
+/* =============== RENDER DIALOGUE =============== */
+function renderDialogue() {
+  const sec = document.getElementById('sec-dialogue');
+  sec.innerHTML = '';
+  const header = el('div','section-header');
+  header.innerHTML = '<div class="icon">📖</div><h2>النَّصُّ الكامِل</h2>';
+  sec.appendChild(header);
+
+  let ci = 0;
+  LINES.forEach((line, li) => {
+    const sp = SPEAKERS[line.speaker];
+    const div = el('div','dialogue-line'+(line.isPoem?' poem-line':''));
+    div.style.borderRightColor = sp.color;
+    div.style.animationDelay = (li*0.06)+'s';
+
+    let wordsHtml = '';
+    line.words.forEach((w,wi) => {
+      wordsHtml += '<span class="word" style="color:'+getColor(ci)+';font-weight:600">'+w.ar+' </span>';
+      ci++;
+    });
+
+    div.innerHTML = `
+      <div class="speaker-badge">
+        <div class="speaker-avatar" style="background:${sp.bg}">${sp.emoji}</div>
+        <span class="speaker-name" style="background:${sp.bg}">${line.speaker}</span>
+      </div>
+      <div class="dialogue-text">${wordsHtml}</div>
+    `;
+    sec.appendChild(div);
+  });
+}
+
+/* =============== RENDER SENTENCES =============== */
+let globalWordsVisible = true;
+function renderSentences() {
+  const sec = document.getElementById('sec-sentences');
+  sec.innerHTML = '';
+  const header = el('div','section-header');
+  header.innerHTML = '<div class="icon">🔍</div><h2>تَحْلِيلُ الجُمَلِ كَلِمَةً بِكَلِمَة</h2>';
+  sec.appendChild(header);
+
+  const globalBtn = el('button','btn btn-accent btn-global','🔄 إخفاء ترجمات الكلمات للجميع');
+  globalBtn.onclick = () => {
+    globalWordsVisible = !globalWordsVisible;
+    globalBtn.textContent = globalWordsVisible ? '🔄 إخفاء ترجمات الكلمات للجميع' : '🔄 إظهار ترجمات الكلمات للجميع';
+    document.querySelectorAll('.word-box').forEach(wb => {
+      globalWordsVisible ? wb.classList.remove('hidden-tr') : wb.classList.add('hidden-tr');
+    });
+    document.querySelectorAll('.words-toggle-btn').forEach(b => {
+      b.innerHTML = globalWordsVisible ? '🙈 إخفاء الكلمات' : '👁️ إظهار الكلمات';
+      b.dataset.visible = globalWordsVisible ? '1' : '0';
+    });
+  };
+  sec.appendChild(globalBtn);
+
+  let ci = 0;
+  LINES.forEach((line, li) => {
+    const sp = SPEAKERS[line.speaker];
+    const card = el('div','card');
+    card.style.animationDelay = (li*0.05)+'s';
+
+    // Header
+    const cardHeader = el('div','sentence-card-header');
+    cardHeader.innerHTML = `
+      <span class="speaker-tag" style="background:${sp.bg}">${sp.emoji} ${line.speaker}</span>
+      ${line.isPoem ? '<span class="poem-tag">📜 نَشيدُ الاسْتِقْلالِ</span>' : ''}
+    `;
+    card.appendChild(cardHeader);
+
+    // Arabic sentence colored
+    const sentDiv = el('div','sentence-arabic');
+    let sHtml = '';
+    line.words.forEach((w,wi) => {
+      sHtml += '<span style="color:'+getColor(ci+wi)+';font-weight:700">'+w.ar+' </span>';
+    });
+    sentDiv.innerHTML = sHtml;
+    card.appendChild(sentDiv);
+
+    // Buttons row
+    const btnsRow = el('div','btns-row');
+    const wToggle = el('button','btn btn-accent btn-sm words-toggle-btn','🙈 إخفاء الكلمات');
+    wToggle.dataset.visible = '1';
+    wToggle.onclick = function() {
+      const vis = this.dataset.visible === '1';
+      card.querySelectorAll('.word-box').forEach(b => vis ? b.classList.add('hidden-tr') : b.classList.remove('hidden-tr'));
+      this.dataset.visible = vis ? '0' : '1';
+      this.innerHTML = vis ? '👁️ إظهار الكلمات' : '🙈 إخفاء الكلمات';
+    };
+    const fToggle = el('button','btn btn-primary btn-sm','📝 الترجمة الكاملة');
+    fToggle.onclick = function() {
+      const ft = card.querySelector('.full-translation');
+      ft.classList.toggle('show');
+      this.innerHTML = ft.classList.contains('show') ? '📝 إخفاء الترجمة' : '📝 الترجمة الكاملة';
+    };
+    btnsRow.appendChild(wToggle);
+    btnsRow.appendChild(fToggle);
+    card.appendChild(btnsRow);
+
+    // Words grid
+    const grid = el('div','words-grid');
+    line.words.forEach((w,wi) => {
+      const wb = el('div','word-box');
+      wb.style.animationDelay = (wi*0.04)+'s';
+      const c = getColor(ci + wi);
+      wb.innerHTML = `
+        <div class="word-box-ar" style="background:${c}">${w.ar}</div>
+        <div class="word-box-tr"><span class="lato">${w.tr}</span></div>
+        <div class="tooltip-bubble"><span class="lato">${w.tr}</span></div>
+      `;
+      grid.appendChild(wb);
+    });
+    card.appendChild(grid);
+    ci += line.words.length;
+
+    // Full translation
+    const ftDiv = el('div','full-translation hidden-content');
+    ftDiv.innerHTML = '<span class="lato">'+line.fullTr.replace(/\n/g,'<br>')+'</span>';
+    card.appendChild(ftDiv);
+
+    sec.appendChild(card);
+  });
+}
+
+/* =============== RENDER QUESTIONS =============== */
+function renderQuestions() {
+  const sec = document.getElementById('sec-questions');
+  sec.innerHTML = '';
+  const header = el('div','section-header');
+  header.innerHTML = '<div class="icon">❓</div><h2>أَسْئِلةٌ وَأَجْوِبة</h2>';
+  sec.appendChild(header);
+
+  QUESTIONS.forEach((q, i) => {
+    const card = el('div','q-card');
+    card.style.animationDelay = (i*0.08)+'s';
+
+    const top = el('div','q-top');
+    top.innerHTML = '<span class="q-num">'+(i+1)+'</span><span class="q-text">'+q.q+'</span>';
+    card.appendChild(top);
+
+    const btns = el('div','btns-row');
+    const qTrBtn = el('button','btn btn-outline btn-sm','🌐 ترجمة السؤال');
+    const aBtn = el('button','btn btn-accent btn-sm','💡 إظهار الجواب');
+    btns.appendChild(qTrBtn);
+    btns.appendChild(aBtn);
+    card.appendChild(btns);
+
+    const qTrDiv = el('div','hidden-content');
+    qTrDiv.innerHTML = '<div class="q-tr-box"><span class="lato" style="color:#636e72">'+q.qTr+'</span></div>';
+    card.appendChild(qTrDiv);
+    qTrBtn.onclick = () => {
+      qTrDiv.classList.toggle('show');
+      qTrBtn.innerHTML = qTrDiv.classList.contains('show') ? '🌐 إخفاء الترجمة' : '🌐 ترجمة السؤال';
+    };
+
+    const aDiv = el('div','hidden-content');
+    aDiv.innerHTML = '<div class="answer-box"><div class="ar-ans">'+q.a+'</div><span class="tr-ans lato">'+q.aTr+'</span></div>';
+    card.appendChild(aDiv);
+    aBtn.onclick = () => {
+      aDiv.classList.toggle('show');
+      aBtn.innerHTML = aDiv.classList.contains('show') ? '💡 إخفاء الجواب' : '💡 إظهار الجواب';
+    };
+
+    sec.appendChild(card);
+  });
+}
+
+/* =============== GAMES =============== */
+function renderGames() {
+  const sec = document.getElementById('sec-games');
+  sec.innerHTML = '';
+  const header = el('div','section-header');
+  header.innerHTML = '<div class="icon">🎮</div><h2>أَلْعابٌ لُغَوِيَّة</h2>';
+  sec.appendChild(header);
+
+  // Game 1
+  const g1 = el('div','game-section');
+  g1.id = 'sec-fc';
+  g1.innerHTML = '<div class="game-title">🃏 بِطاقاتُ الذّاكِرَة</div>';
+  sec.appendChild(g1);
+  initFlashcards(g1);
+
+  sec.appendChild(el('div','divider'));
+
+  // Game 2
+  const g2 = el('div','game-section');
+  g2.id = 'sec-match';
+  g2.innerHTML = '<div class="game-title">🔗 وَصْلُ الكَلِمات</div>';
+  sec.appendChild(g2);
+  initMatching(g2);
+
+  sec.appendChild(el('div','divider'));
+
+  // Game 3
+  const g3 = el('div','game-section');
+  g3.id = 'sec-fb';
+  g3.innerHTML = '<div class="game-title">✍️ أَكْمِلِ الجُمْلَة</div>';
+  sec.appendChild(g3);
+  initFillBlank(g3);
+}
+
+/* ===== GAME 1: FLASHCARDS ===== */
+function initFlashcards(gs) {
+  let deck, idx, mastered, round = 0;
+
+  function startRound() {
+    round++;
+    deck = shuffle(WORD_BANK);
+    idx = 0;
+    mastered = 0;
+    render();
+  }
+
+  function render() {
+    let inner = gs.querySelector('.fc-inner');
+    if(inner) inner.remove();
+    const wrap = el('div','fc-inner');
+
+    // Stats
+    const stats = el('div','game-stats');
+    stats.innerHTML = `
+      <span class="stat-badge">🔄 الجولة: ${round}</span>
+      <span class="stat-badge">✅ أُتقنت: ${mastered}/${deck.length + mastered}</span>
+      <span class="stat-badge">📇 البطاقة: ${Math.min(idx+1, deck.length)}/${deck.length}</span>
+    `;
+    wrap.appendChild(stats);
+
+    // Progress
+    const pb = el('div','progress-bar');
+    const pct = deck.length + mastered > 0 ? (mastered / (deck.length + mastered))*100 : 0;
+    pb.innerHTML = '<div class="progress-fill" style="width:'+pct+'%"></div>';
+    wrap.appendChild(pb);
+
+    if(idx >= deck.length) {
+      const done = el('div','fb-result');
+      done.innerHTML = `
+        <div style="font-size:3rem;margin-bottom:0.8rem;animation:bounceIn 0.5s ease-out">🎉</div>
+        <div style="font-size:1.4rem;font-weight:700;margin-bottom:0.5rem;color:var(--primary)">انتهت الجولة ${round}!</div>
+        <div style="color:var(--text-mid);margin-bottom:1.5rem">أتقنتَ ${mastered} من ${deck.length + mastered} كلمة</div>
+      `;
+      const nb = el('button','btn btn-accent btn-lg','🔄 جولة جديدة');
+      nb.onclick = startRound;
+      done.appendChild(nb);
+      wrap.appendChild(done);
+      gs.appendChild(wrap);
+      return;
+    }
+
+    const w = deck[idx];
+    const fcCont = el('div','fc-container');
+    const fc = el('div','flashcard');
+    fc.innerHTML = `
+      <div class="flashcard-face flashcard-front">
+        <div class="fc-word">${w.ar}</div>
+        <div class="fc-hint">🔄 اضغط للكشف</div>
+      </div>
+      <div class="flashcard-face flashcard-back">
+        <div class="fc-tr"><span class="lato">${w.tr}</span></div>
+        <div class="fc-ar">${w.ar}</div>
+      </div>
+    `;
+    fc.onclick = () => fc.classList.toggle('flipped');
+    fcCont.appendChild(fc);
+    wrap.appendChild(fcCont);
+
+    const btns = el('div','fc-buttons');
+
+    const mastBtn = el('button','btn btn-accent','✅ أتقنتُها');
+    mastBtn.onclick = () => { mastered++; deck.splice(idx,1); if(idx>=deck.length) idx=Math.max(0,deck.length-1); render(); };
+
+    const nextBtn = el('button','btn btn-primary','➡️ التالية');
+    nextBtn.onclick = () => { idx++; render(); };
+
+    const prevBtn = el('button','btn btn-purple btn-sm','⬅️ السابقة');
+    prevBtn.onclick = () => { if(idx>0){ idx--; render(); } };
+
+    const shufBtn = el('button','btn btn-outline btn-sm','🔀 خلط');
+    shufBtn.onclick = () => { deck=shuffle(deck); idx=0; render(); };
+
+    btns.appendChild(mastBtn);
+    btns.appendChild(nextBtn);
+    btns.appendChild(prevBtn);
+    btns.appendChild(shufBtn);
+    wrap.appendChild(btns);
+
+    gs.appendChild(wrap);
+  }
+
+  startRound();
+}
+
+/* ===== GAME 2: MATCHING ===== */
+function initMatching(gs) {
+  let round=0, errors, matched, selected, pairs, matchedPairs;
+
+  function startRound() {
+    round++;
+    errors=0; matched=0; selected=null;
+    matchedPairs = new Set();
+    pairs = shuffle(WORD_BANK).slice(0,6);
+    render();
+  }
+
+  function render() {
+    let inner = gs.querySelector('.match-inner');
+    if(inner) inner.remove();
+    const wrap = el('div','match-inner');
+
+    const stats = el('div','game-stats');
+    stats.id = 'match-stats';
+    stats.innerHTML = `
+      <span class="stat-badge">🔄 الجولة: ${round}</span>
+      <span class="stat-badge" id="match-done">✅ تمّ: ${matched}/${pairs.length}</span>
+      <span class="stat-badge" id="match-errors">❌ أخطاء: ${errors}</span>
+    `;
+    wrap.appendChild(stats);
+
+    const arCards = shuffle(pairs.map((p,i)=>({text:p.ar,type:'ar',idx:i})));
+    const trCards = shuffle(pairs.map((p,i)=>({text:p.tr,type:'tr',idx:i})));
+    const mixed = shuffle([...arCards,...trCards]);
+
+    const grid = el('div','match-grid');
+    mixed.forEach((c,ci) => {
+      const card = el('div','match-card');
+      card.style.animationDelay = (ci*0.04)+'s';
+      card.style.animation = 'popIn 0.3s ease-out '+(ci*0.04)+'s both';
+      card.dataset.type = c.type;
+      card.dataset.idx = c.idx;
+      card.innerHTML = c.type === 'tr' ? '<span class="lato">'+c.text+'</span>' : c.text;
+
+      card.onclick = function() {
+        if(this.classList.contains('matched')) return;
+        if(selected && selected === this) { this.classList.remove('selected'); selected=null; return; }
+        if(!selected) { selected=this; this.classList.add('selected'); return; }
+
+        if(selected.dataset.idx === this.dataset.idx && selected.dataset.type !== this.dataset.type) {
+          selected.classList.remove('selected');
+          selected.classList.add('matched');
+          this.classList.add('matched');
+          selected=null;
+          matched++;
+          document.getElementById('match-done').innerHTML = '✅ تمّ: '+matched+'/'+pairs.length;
+
+          if(matched === pairs.length) {
+            setTimeout(() => {
+              const starsCount = errors===0?3:errors<=2?2:1;
+              const starsHtml = '⭐'.repeat(starsCount)+'☆'.repeat(3-starsCount);
+              const res = el('div','');
+              res.innerHTML = `
+                <div class="stars-display" style="animation:bounceIn 0.5s ease-out">${starsHtml}</div>
+                <div style="text-align:center;font-size:1.15rem;font-weight:600;margin-bottom:1.2rem;color:var(--primary)">
+                  ${starsCount===3?'🌟 ممتاز! بدون أخطاء!':starsCount===2?'👏 جيّد جدًّا!':'💪 حاول أفضل!'}
+                  <br><span style="font-size:0.9rem;color:var(--text-mid)">الجولة ${round} — ${errors} أخطاء</span>
+                </div>
+              `;
+              const nb = el('button','btn btn-accent btn-lg','🔄 جولة جديدة');
+              nb.style.display='block'; nb.style.margin='0 auto';
+              nb.onclick = startRound;
+              res.appendChild(nb);
+              wrap.appendChild(res);
+            },500);
+          }
+        } else {
+          errors++;
+          this.classList.add('wrong');
+          selected.classList.add('wrong');
+          const s=selected, t=this;
+          setTimeout(() => { s.classList.remove('selected','wrong'); t.classList.remove('wrong'); }, 650);
+          selected=null;
+          document.getElementById('match-errors').innerHTML = '❌ أخطاء: '+errors;
+        }
+      };
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    gs.appendChild(wrap);
+  }
+
+  startRound();
+}
+
+/* ===== GAME 3: FILL BLANK ===== */
+function initFillBlank(gs) {
+  let round=0, questions, score, answered;
+
+  function startRound() {
+    round++;
+    score=0; answered=0;
+    questions = shuffle(FB_BANK).slice(0,5);
+    render();
+  }
+
+  function render() {
+    let inner = gs.querySelector('.fb-inner');
+    if(inner) inner.remove();
+    const wrap = el('div','fb-inner');
+
+    const stats = el('div','game-stats');
+    stats.id = 'fb-stats';
+    stats.innerHTML = `
+      <span class="stat-badge">🔄 الجولة: ${round}</span>
+      <span class="stat-badge" id="fb-score-badge">✅ صحيح: ${score}/5</span>
+    `;
+    wrap.appendChild(stats);
+
+    questions.forEach((q,qi) => {
+      const qDiv = el('div','fb-question');
+      qDiv.style.animationDelay = (qi*0.08)+'s';
+      qDiv.dataset.answered = '0';
+      const sentHtml = q.sentence.replace('_____','<span class="fb-blank" id="blank-'+qi+'">؟</span>');
+      qDiv.innerHTML = `
+        <div class="fb-sentence">${sentHtml}</div>
+        <div class="fb-hint"><span class="lato">💡 ${q.hint}</span></div>
+      `;
+      const optsDiv = el('div','fb-options');
+      shuffle(q.options).forEach(opt => {
+        const btn = el('button','fb-opt',opt);
+        btn.onclick = function() {
+          if(qDiv.dataset.answered === '1') return;
+          qDiv.dataset.answered = '1';
+          optsDiv.querySelectorAll('.fb-opt').forEach(b => b.classList.add('disabled'));
+          const blank = document.getElementById('blank-'+qi);
+          if(opt === q.answer) {
+            this.classList.add('correct');
+            score++;
+            blank.textContent = q.answer;
+            blank.style.color = '#27ae60';
+            blank.style.borderColor = '#27ae60';
+          } else {
+            this.classList.add('wrong-opt');
+            optsDiv.querySelectorAll('.fb-opt').forEach(b => { if(b.textContent===q.answer) b.classList.add('correct'); });
+            blank.textContent = q.answer;
+            blank.style.color = '#e74c3c';
+            blank.style.borderColor = '#e74c3c';
+          }
+          answered++;
+          document.getElementById('fb-score-badge').innerHTML = '✅ صحيح: '+score+'/5';
+          if(answered === 5) {
+            setTimeout(() => {
+              const res = el('div','fb-result');
+              const emoji = score>=5?'🏆':score>=4?'🌟':score>=3?'👏':score>=2?'💪':'📚';
+              const msg = score>=5?'ممتاز! درجة كاملة!':score>=4?'رائع جدًّا!':score>=3?'جيّد جدًّا!':score>=2?'جيّد، حاول أكثر!':'حاول مرّة أخرى!';
+              res.innerHTML = `
+                <div style="font-size:3rem;margin-bottom:0.5rem;animation:bounceIn 0.5s ease-out">${emoji}</div>
+                <div class="fb-score">${score}/5</div>
+                <div style="font-size:1.2rem;margin:0.5rem 0 1.5rem;color:var(--text-mid)">${msg}</div>
+              `;
+              const nb = el('button','btn btn-accent btn-lg','🔄 جولة جديدة');
+              nb.onclick = startRound;
+              res.appendChild(nb);
+              wrap.appendChild(res);
+            },700);
+          }
+        };
+        optsDiv.appendChild(btn);
+      });
+      qDiv.appendChild(optsDiv);
+      wrap.appendChild(qDiv);
+    });
+    gs.appendChild(wrap);
+  }
+
+  startRound();
+}
+
+/* =============== INIT =============== */
+document.addEventListener('DOMContentLoaded', () => {
+  createStars();
+  renderDialogue();
+  renderSentences();
+  renderQuestions();
+  renderGames();
+});
+</script>
+</body>
+</html>
